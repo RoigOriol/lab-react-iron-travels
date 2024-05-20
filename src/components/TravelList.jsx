@@ -3,13 +3,17 @@ import { useState } from "react";
 import travelPlansData from "../assets/travel-plans.json";
 
 function TravelList() {
-  const [travelCards, setTravelCards] = useState(travelPlansData);
+  const [travelPlans, setTravelPlans] = useState(travelPlansData);
 
   const clone = JSON.parse(JSON.stringify(travelPlansData));
-
+ const handleDelete=(indexToDelete)=>{
+  const clone=JSON.parse(JSON.stringify(travelPlans))
+  clone.splice(indexToDelete,1)
+  setTravelPlans(clone)
+ }
   return (
     <div className="card-container">
-      {travelCards.map((eachPlan, index) => {
+      {travelPlans.map((eachPlan, index) => {
         return (
           <div key={eachPlan.id} className="main-card">
             <img
@@ -36,7 +40,7 @@ function TravelList() {
                   <div className="great-deal">All-Inclusive</div>
                 )}
               </div>
-              <button className="delete" onClick={() => removePlan(index)}>
+              <button className="delete" onClick={() => handleDelete(index)}>
                 Borrar
               </button>
             </div>
